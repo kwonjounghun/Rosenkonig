@@ -23,7 +23,7 @@ function config() {
   // 블록 한 칸의 크기
   this.blockSize = 11.1111;
   // 사용할 수 있는 토큰의 수
-  this.token = 5;
+  this.token = 52;
   // turn이 true면 player1 false면 player2
   this.turn = false;
   // 왕관의 위치
