@@ -32,9 +32,63 @@ body{
 
 .header .rotate{
     position: absolute;
+    top: 0;
     right: 20px;
     line-height: 50px;
     cursor: pointer;
+}
+
+.header .hWrap{
+    width: 90%;
+    height: 100%;
+}
+
+.header .hWrap .p1,
+.header .hWrap .p2,
+.header .hWrap .token{
+    font-size: 1.5rem;
+    float: left;
+    width: 20%;
+    height: 100%;
+    line-height: 50px;
+    color: white;
+}
+
+.header .hWrap .p1,
+.header .hWrap .p2,
+.header .hWrap .token {
+    padding-left: 1.5rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.header .hWrap .p1::before,
+.header .hWrap .p2::before,
+.header .hWrap .token::before {
+    width: 1rem;
+    height: 100%;
+    display: block;
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    background-color: red;
+}
+
+
+.header .hWrap .p2::before {
+    background-color: blue;
+}
+
+.header .hWrap .token::before{
+    background-color: yellow;
+    color: black;
+    content: "T"
+}
+
+.header .hWrap .p1hero::before,
+.header .hWrap .p2hero::before{
+    content: "H"
 }
 
 .info{

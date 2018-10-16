@@ -23,7 +23,7 @@ function config() {
   // 블록 한 칸의 크기
   this.blockSize = 11.1111;
   // 사용할 수 있는 토큰의 수
-  this.token = 52;
+  this.token = 5;
   // turn이 true면 player1 false면 player2
   this.turn = false;
   // 왕관의 위치
@@ -52,8 +52,13 @@ function config() {
   this.player2Cost = 0;
 
   this.gameEnd = () => {
+    let winer = "빨강";
+    if(this.player1Cost < this.player2Cost){
+      winer = "파랑";
+    }
     setTimeout(() => {
-      alert("게임 종료");
+      alert(`${winer} 승리!`);
+      location.reload();
     }, 500);
   };
 }
@@ -232,6 +237,11 @@ function rosenKonig() {
     }
     currentPlayer.classList.remove("not-my-turn");
     nextPlayer.classList.add("not-my-turn");
+    document.querySelector(".header .p1hero").textContent = Config.player1Hero;
+    document.querySelector(".header .p2hero").textContent = Config.player2Hero;
+    document.querySelector(".header .token").textContent = Config.token;
+    document.querySelector(".header .p1cost").textContent = Config.player1Cost;
+    document.querySelector(".header .p2cost").textContent = Config.player2Cost;
     availableCard();
   }
 
@@ -275,6 +285,7 @@ function rosenKonig() {
 
     if (!Config.player1UsedCardCount && !Config.player2UsedCardCount) {
       Config.gameEnd();
+      init();
     }
     if (!Config[userCount]) turnEnd();
   }
@@ -414,6 +425,7 @@ function rosenKonig() {
       insertToken(card, cardDom, index);
       if (isGameEnd(Config.token - 1)) {
         Config.gameEnd();
+        init();
       } else {
         Config.token -= 1;
       }
@@ -448,7 +460,7 @@ function rosenKonig() {
             clickSound.currentTime = 0;
             setTimeout(() => {
               clickSound.play();
-            }, 100)
+            }, 100);
             cardDom.removeEventListener("click", cardHandle, false);
             cardDom.removeEventListener("blur", blreHandle, false);
             turnEnd();
@@ -553,7 +565,7 @@ function rosenKonig() {
     }
   }
 
-  this.init = () => {
+  function init() {
     // 게임 판을 만든다.
     createBoard();
     // 와관 Element를 board의 중앙에 배치한다.
@@ -574,7 +586,9 @@ function rosenKonig() {
     // 카드 deckdmf 클릭시 해당 차례의 플레이어의 손패에 카드를 전달하는 이벤트를 걸어준다.
     Config.cardDeckBtn.addEventListener("click", getFromDeck);
     turnEnd();
-  };
+  }
+
+  this.init = init;
 
   ////////////////////////////////////////////////////////////
   //                         INIT                           //
